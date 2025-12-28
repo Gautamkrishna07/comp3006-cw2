@@ -6,8 +6,9 @@ const router = express.Router();
 const {
     loginUser,
     signupUser,
+    deleteUser,
     getUserById,
-    getUserByUsername
+    getUserByUsername,
 } = require("../controllers/userController");
 
 // Routes relative to "/api/users"
@@ -19,5 +20,6 @@ router.get("/username/:username", getUserByUsername);
 // MIDDLEWARE
 router.use(requireAuth);
 // PROTECTED ROUTES
+router.delete("/:id", deleteUser);
 
 module.exports = router;

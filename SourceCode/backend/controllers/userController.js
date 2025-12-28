@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+const Comment = require("../models/commentModel");
+const Post = require("../models/postModel");
+const Relationship = require("../models/relationshipModel");
 const User = require("../models/userModel");
 
 const jwt = require("jsonwebtoken");
@@ -78,6 +81,38 @@ const loginUser = async (request, response) => {
 }
 
 
+const deleteUser = async (request, response) => {
+    // Delete User -> Posts/Comments CASCADE
+    // Transaction?
+    const userId = request.user._id;
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+        await Post.deleteMany({ author_id: userId }).session(session);
+        await Comment.deleteMany({ author_id: userId }).session(session);
+        await Relationship.deleteMany({ 
+            $or: [{ follower_id: userId}, { following_id: userId 
+        }]}).session(session);
+
+        const user = await User.findByIdAndDelete(userId).session(session);
+        if (!user) {
+            return response.status(404).json({ error: "User not found." });
+        }
+
+        await session.commitTransaction();
+        session.endSession();
+        response.status(200).json({ message: "Account and linked data deleted." });
+    } catch (e) {
+        await session.abortTransaction();
+        session.endSession();
+        response.status(500).json({ error: e.message });
+    }
+
+}
+
+
 const getUserById = async (request, response) => {
     const { id } = request.params;
 
@@ -118,4 +153,4 @@ const getUserByUsername = async (request, response) => {
 }
 
 
-module.exports = { loginUser, signupUser, getUserById, getUserByUsername };
+module.exports = { loginUser, signupUser, deleteUser, getUserById, getUserByUsername };
