@@ -76,20 +76,35 @@ const deletePost = async (request, response) => {
         return response.status(400).json({error: "Invalid ID format."});
     }
 
-    const post = await Post.findOneAndDelete({
-        _id: id,
-        author_id
-    });
-    if (!post) {
-        return response.status(404).json({error: "Post not found."});
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try {
+        const post = await Post.findOneAndDelete({
+            _id: id,
+            author_id
+        }).session(session);
+
+        if (!post) {
+            await session.abortTransaction();
+            session.endSession();
+            return response.status(404).json({error: "Post not found."});
+        }
+
+        await Comment.deleteMany({ post_id: id }).session(session);
+
+        await session.commitTransaction();
+        session.endSession();
+        
+        const io = request.app.get("socketio");
+        io.emit("deleted_post", id);
+
+        response.status(200).json(post);
+    } catch (e) {
+        await session.abortTransaction();
+        session.endSession();
+        response.status(500).json({ error: e.message });
     }
-
-    const io = request.app.get("socketio");
-    io.emit("deleted_post", id);
-
-    response.status(200).json(post);
-
-    // Handle orphans
 }
 
 
