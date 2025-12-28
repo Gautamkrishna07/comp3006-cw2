@@ -44,10 +44,10 @@ const getUsersPosts = async (request, response) => {
 
 
 const createPost = async (request, response) => {
-    const { author_id, body } = request.body;
+    const { body } = request.body;
+    const author_id = request.user._id;
 
     let emptyFields = [];
-    if (!author_id) emptyFields.push("author_id");
     if (!body) emptyFields.push("body");
     if (emptyFields.length > 0)
         return response.status(400).json({ error: "Please fill in all fields.", emptyFields });
@@ -70,11 +70,16 @@ const createPost = async (request, response) => {
 
 const deletePost = async (request, response) => {
     const { id } = request.params;
+    const author_id = request.user._id;
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return response.status(400).json({error: "Invalid ID format."});
     }
 
-    const post = await Post.findByIdAndDelete(id);
+    const post = await Post.findOneAndDelete({
+        _id: id,
+        author_id
+    });
     if (!post) {
         return response.status(404).json({error: "Post not found."});
     }
@@ -83,16 +88,23 @@ const deletePost = async (request, response) => {
     io.emit("deleted_post", id);
 
     response.status(200).json(post);
+
+    // Handle orphans
 }
 
 
 const updatePost = async (request, response) => {
     const { id } = request.params;
+    const author_id = request.user._id;
+    
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return response.status(400).json({error: "Invalid ID format."});
     }
 
-    const post = await Post.findByIdAndUpdate(id, { ...request.body });
+    const post = await Post.findOneAndUpdate(
+        { _id: id, author_id }, 
+        { ...request.body }
+    );
     if (!post) {
         return response.status(404).json({error: "Post not found."});
     }

@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 
 const followUser = async (request, response) => {
     const { targetUserId } = request.params;
-    const { follower_id } = request.body; // Change when auth implemented
+    const follower_id = request.user._id;
     
     if (!mongoose.Types.ObjectId.isValid(targetUserId)) {
         return response.status(400).json({error: "Invalid Target User ID format."});
@@ -40,7 +40,7 @@ const followUser = async (request, response) => {
 
 const unfollowUser = async (request, response) => {
     const { targetUserId } = request.params;
-    const { follower_id } = request.body; // Change when auth implemented
+    const follower_id = request.user._id;
     
     if (!mongoose.Types.ObjectId.isValid(targetUserId)) {
         return response.status(400).json({error: "Invalid Target User ID format."});

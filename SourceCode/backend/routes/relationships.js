@@ -1,4 +1,6 @@
 const express = require("express");
+const requireAuth = require("../middleware/requireAuth");
+
 const router = express.Router();
 
 const {
@@ -9,6 +11,11 @@ const {
 } = require("../controllers/relationshipController");
 
 // Routes relative to "/api/relationships"
+// PUBLIC ROUTES
+
+// MIDDLEWARE
+router.use(requireAuth);
+// PROTECTED ROUTES
 router.post("/:targetUserId", followUser);
 router.delete("/:targetUserId", unfollowUser);
 router.get("/following/:userId", getFollowing);

@@ -1,4 +1,6 @@
 const express = require("express");
+const requireAuth = require("../middleware/requireAuth");
+
 const router = express.Router();
 
 const {
@@ -11,9 +13,13 @@ const {
 } = require("../controllers/postController");
 
 // Routes relative to "/api/posts"
+// PUBLIC ROUTES
 router.get("/", getPosts);
 router.get("/:id", getPost);
 router.get("/user/:username", getUsersPosts);
+// MIDDLEWARE
+router.use(requireAuth);
+// PROTECTED ROUTES
 router.post("/", createPost);
 router.delete("/:id", deletePost);
 router.patch("/:id", updatePost);
