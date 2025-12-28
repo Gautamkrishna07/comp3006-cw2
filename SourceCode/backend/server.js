@@ -1,0 +1,40 @@
+require("dotenv").config();
+
+const express = require("express");
+const mongoose = require("mongoose");
+
+const http = require("http");
+const { Server } = require("socket.io");
+
+const postRoutes = require("./routes/posts");
+
+// Express App
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: { origin: "*" }
+});
+
+// Middleware
+app.use(express.json())
+app.set("socketio", io);
+
+app.use((request, response, next) => {
+    console.log(request.path, request.method);
+    next();
+});
+
+// Routes
+app.use("/api/posts", postRoutes);
+
+// Database
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        // Listen for requests, only AFTER database connection established
+        app.listen(process.env.PORT, () => {
+            console.log("Connected to database and listening on Port 4000!")
+        });
+    })
+    .catch((error) => {
+        console.error(error);
+    });
