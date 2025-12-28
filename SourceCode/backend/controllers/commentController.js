@@ -1,4 +1,3 @@
-const { request } = require("express");
 const mongoose = require("mongoose");
 
 const Comment = require("..//models/commentModel");

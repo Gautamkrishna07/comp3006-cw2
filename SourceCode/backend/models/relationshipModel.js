@@ -18,4 +18,4 @@ const relationshipSchema = new mongoose.Schema({
 // Retrieved 2025-12-28, License - CC BY-SA 3.0
 relationshipSchema.index({ follower_id: 1, following_id: 1 }, { unique: true });
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model("Relationship", relationshipSchema);
