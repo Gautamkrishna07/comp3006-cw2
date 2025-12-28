@@ -5,7 +5,7 @@ const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
 const getPosts = async (request, response) => {
-    const posts = await Post.find({}).toSorted({createdAt: -1});
+    const posts = await Post.find({}).sort({createdAt: -1});
     response.status(200).json(posts);
 };
 
@@ -63,8 +63,7 @@ const createPost = async (request, response) => {
 
         response.status(201).json(post);
     }
-    catch (e)
-    {
+    catch (e) {
         response.status(500).json({ error: e.message });
     }
 }
