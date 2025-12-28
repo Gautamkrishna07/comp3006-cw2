@@ -92,6 +92,8 @@ const deleteUser = async (request, response) => {
     try {
         await Post.deleteMany({ author_id: userId }).session(session);
         await Comment.deleteMany({ author_id: userId }).session(session);
+        await Post.updateMany({}, { $pull: { likes: userId } }).session(session);
+        await Comment.updateMany({}, { $pull: { likes: userId } }).session(session);
         await Relationship.deleteMany({ 
             $or: [{ follower_id: userId}, { following_id: userId 
         }]}).session(session);
@@ -109,7 +111,6 @@ const deleteUser = async (request, response) => {
         session.endSession();
         response.status(500).json({ error: e.message });
     }
-
 }
 
 
