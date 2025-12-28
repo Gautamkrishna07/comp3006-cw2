@@ -1,7 +1,8 @@
 const { request } = require("express");
-const Post = require("../models/postModel");
 const mongoose = require("mongoose");
 
+const Post = require("../models/postModel");
+const User = require("../models/userModel");
 
 const getPosts = async (request, response) => {
     const posts = await Post.find({}).toSorted({createdAt: -1});
@@ -21,6 +22,25 @@ const getPost = async (request, response) => {
     }
 
     response.status(200).json(post);
+}
+
+
+const getUsersPosts = async (request, response) => {
+    const { username } = req.params;
+    try {
+        const user = await User.findOne({ username });
+        if (!user) {
+            return response.status(404).json({error: "User not found."});
+        }
+
+        const posts = Post.find({ author_id: user._id })
+            .populate("author_id", "username firstName lastName")
+            .sort({ createdAt: -1 });
+        
+        response.status(200).json(posts);
+    } catch (e) {
+        response.status(500).json({ error: e.message });
+    }
 }
 
 
@@ -83,4 +103,4 @@ const updatePost = async (request, response) => {
 }
 
 
-module.exports = { getPosts, getPost, createPost, deletePost, updatePost };
+module.exports = { getPosts, getPost, getUsersPosts, createPost, deletePost, updatePost };
