@@ -9,7 +9,8 @@ const postSchema = new Schema({
     },
     body: {
         type: String,
-        required: true
+        required: true,
+        maxLength: 512
     },
     likes: {
         type: Number,

@@ -1,27 +1,30 @@
+// Routes relative to "/api/posts"
+
 const express = require("express");
 
-const { 
-    createPost
+const {
+    getPosts,
+    getPost,
+    createPost,
+    deletePost,
+    updatePost
 } = require("../controllers/postController");
 
 const router = express.Router();
 
-router.get("/", (request, response) => {
-    response.json({message: "Get all posts."});
-});
+// GET
+router.get("/", getPosts);
 
-router.get("/:id", (request, response) => {
-    response.json({message: "Get single post."});
-});
+// GET
+router.get("/:id", getPost);
 
-router.get("/", createPost)
+// POST
+router.get("/", createPost);
 
-router.get("/:id", (request, response) => {
-    response.json({message: "Delete a post."});
-})
+// DELETE
+router.get("/:id", deletePost);
 
-router.get("/:id", (request, response) => {
-    response.json({message: "Update a post."});
-})
+// UPDATE
+router.get("/:id", updatePost);
 
 module.exports = router;
