@@ -78,8 +78,7 @@ const getFollowing = async (request, response) => {
     }
 
     try {
-        const user = await User.findById(userId);
-        if (!user) {
+        if (!(await User.exists({ _id: userId }))) {
             return response.status(404).json({ error: "User not found." });
         }
 
@@ -102,8 +101,7 @@ const getFollowers = async (request, response) => {
     }
 
     try {
-        const user = await User.findById(userId);
-        if (!user) {
+        if (!(await User.exists({ _id: userId }))) {
             return response.status(404).json({ error: "User not found." });
         }
 
