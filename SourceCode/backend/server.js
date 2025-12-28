@@ -6,7 +6,10 @@ const mongoose = require("mongoose");
 const http = require("http");
 const { Server } = require("socket.io");
 
+const commentRoutes = require("./routes/comments");
 const postRoutes = require("./routes/posts");
+const relationshipRoutes = require("./routes/relationships");
+const userRoutes = require("./routes/users");
 
 // Express App
 const app = express();
@@ -25,7 +28,10 @@ app.use((request, response, next) => {
 });
 
 // Routes
+app.use("/api/posts/:postId/comments", commentRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api/relationships", relationshipRoutes)
+app.use("/api/users", userRoutes);
 
 // Database
 mongoose.connect(process.env.MONGO_URI)
