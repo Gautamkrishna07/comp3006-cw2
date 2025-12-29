@@ -6,16 +6,16 @@ const User = require("../models/userModel");
 const followUser = async (request, response) => {
     const { targetUserId } = request.params;
     const follower_id = request.user._id;
-    
+
     if (!mongoose.Types.ObjectId.isValid(targetUserId)) {
-        return response.status(400).json({error: "Invalid Target User ID format."});
+        return response.status(400).json({ error: "Invalid Target User ID format." });
     }
     if (!mongoose.Types.ObjectId.isValid(follower_id)) {
-        return response.status(400).json({error: "Invalid Follower ID format."});
+        return response.status(400).json({ error: "Invalid Follower ID format." });
     }
 
     if (follower_id === targetUserId) {
-        return response.status(400).json({error: "You can't follow yourself..."});
+        return response.status(400).json({ error: "You can't follow yourself..." });
     }
 
     try {
@@ -35,22 +35,22 @@ const followUser = async (request, response) => {
 
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const unfollowUser = async (request, response) => {
     const { targetUserId } = request.params;
     const follower_id = request.user._id;
-    
+
     if (!mongoose.Types.ObjectId.isValid(targetUserId)) {
-        return response.status(400).json({error: "Invalid Target User ID format."});
+        return response.status(400).json({ error: "Invalid Target User ID format." });
     }
     if (!mongoose.Types.ObjectId.isValid(follower_id)) {
-        return response.status(400).json({error: "Invalid Follower ID format."});
+        return response.status(400).json({ error: "Invalid Follower ID format." });
     }
 
     if (follower_id === targetUserId) {
-        return response.status(400).json({error: "You can't unfollow yourself..."});
+        return response.status(400).json({ error: "You can't unfollow yourself..." });
     }
 
     try {
@@ -67,14 +67,14 @@ const unfollowUser = async (request, response) => {
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const getFollowing = async (request, response) => {
     const { userId } = request.params;
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-        return response.status(400).json({error: "Invalid Target User ID format."});
+        return response.status(400).json({ error: "Invalid Target User ID format." });
     }
 
     try {
@@ -89,15 +89,15 @@ const getFollowing = async (request, response) => {
         response.status(200).json(following);
     } catch (e) {
         response.status(500).json({ error: e.message });
-    }   
-}
+    }
+};
 
 
 const getFollowers = async (request, response) => {
     const { userId } = request.params;
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-        return response.status(400).json({error: "Invalid Target User ID format."});
+        return response.status(400).json({ error: "Invalid Target User ID format." });
     }
 
     try {
@@ -112,8 +112,8 @@ const getFollowers = async (request, response) => {
         response.status(200).json(followers);
     } catch (e) {
         response.status(500).json({ error: e.message });
-    }   
-}
+    }
+};
 
 
 module.exports = { followUser, unfollowUser, getFollowing, getFollowers };

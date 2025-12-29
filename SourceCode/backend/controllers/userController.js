@@ -11,7 +11,7 @@ const validator = require("validator");
 
 const createJwt = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
-}
+};
 
 
 const signupUser = async (request, response) => {
@@ -32,13 +32,13 @@ const signupUser = async (request, response) => {
         if (!validator.isStrongPassword(password))
             return response.status(400).json({ error: "Password is not strong enough." });
 
-        if (await User.exists({ $or: [{ email }, { username }] })) {
+        if (await User.exists({ $or: [ { email }, { username } ] })) {
             return response.status(409).json({ error: "Email or Username already in use." });
         }
 
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
-        
+
         const user = await User.create({
             email,
             username,
@@ -52,12 +52,12 @@ const signupUser = async (request, response) => {
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const loginUser = async (request, response) => {
     const { email, password } = request.body;
-    
+
     try {
         let emptyFields = [];
         if (!email) emptyFields.push("email");
@@ -80,7 +80,7 @@ const loginUser = async (request, response) => {
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const deleteUser = async (request, response) => {
@@ -96,9 +96,9 @@ const deleteUser = async (request, response) => {
         await Comment.deleteMany({ author_id: userId }).session(session);
         await Post.updateMany({}, { $pull: { likes: userId } }).session(session);
         await Comment.updateMany({}, { $pull: { likes: userId } }).session(session);
-        await Relationship.deleteMany({ 
-            $or: [{ follower_id: userId}, { following_id: userId 
-        }]}).session(session);
+        await Relationship.deleteMany({
+            $or: [ { follower_id: userId }, { following_id: userId
+            } ] }).session(session);
 
         const user = await User.findByIdAndDelete(userId).session(session);
         if (!user) {
@@ -113,14 +113,14 @@ const deleteUser = async (request, response) => {
         session.endSession();
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const getUserById = async (request, response) => {
     const { id } = request.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return response.status(400).json({error: "Invalid ID format."});
+        return response.status(400).json({ error: "Invalid ID format." });
     }
 
     try {
@@ -135,7 +135,7 @@ const getUserById = async (request, response) => {
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const getUserByUsername = async (request, response) => {
@@ -153,7 +153,7 @@ const getUserByUsername = async (request, response) => {
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 module.exports = { loginUser, signupUser, deleteUser, getUserById, getUserByUsername };

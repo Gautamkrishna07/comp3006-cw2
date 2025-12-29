@@ -12,7 +12,7 @@ const requireAuth = async (request, response, next) => {
 
     try {
         const { _id } = jwt.verify(token, process.env.SECRET);
-        request.user = await User.findById(_id).select(_.id);
+        request.user = await User.findById(_id).select(_id);
 
         if (!request.user) {
             return response.status(404).json({ error: "User not found." });
@@ -20,10 +20,10 @@ const requireAuth = async (request, response, next) => {
 
         next();
 
-    } catch (e) {
+    } catch {
         return response.status(401).json({ error: "Request not authorized." });
     }
 
-}
+};
 
 module.exports = requireAuth;

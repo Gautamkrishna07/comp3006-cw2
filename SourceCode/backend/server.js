@@ -24,10 +24,11 @@ app.use(cors({
 }));
 
 // Middleware
-app.use(express.json())
+app.use(express.json());
 app.set("socketio", io);
 
 app.use((request, response, next) => {
+    // eslint-disable-next-line no-console
     console.log(request.path, request.method);
     next();
 });
@@ -45,7 +46,7 @@ app.get("/api/smoke-test", (request, response) => {
 // Routes
 app.use("/api/posts/:postId/comments", commentRoutes);
 app.use("/api/posts", postRoutes);
-app.use("/api/relationships", relationshipRoutes)
+app.use("/api/relationships", relationshipRoutes);
 app.use("/api/users", userRoutes);
 
 // Database
@@ -53,9 +54,11 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // Listen for requests, only AFTER database connection established
         server.listen(process.env.PORT, () => {
-            console.log(`Connected to database and listening on Port ${process.env.PORT}!`)
+            // eslint-disable-next-line no-console
+            console.log(`Connected to database and listening on Port ${process.env.PORT}!`);
         });
     })
     .catch((error) => {
+        // eslint-disable-next-line no-console
         console.error(error);
     });

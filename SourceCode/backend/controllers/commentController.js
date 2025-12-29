@@ -6,17 +6,17 @@ const Post = require("../models/postModel");
 const getComments = async (request, response) => {
     const { postId } = request.params;
     if (!mongoose.Types.ObjectId.isValid(postId)) {
-        return response.status(400).json({error: "Invalid Post ID format."});
+        return response.status(400).json({ error: "Invalid Post ID format." });
     }
 
     const post = await Post.findById( postId );
     if (!post) {
-        return response.status(404).json({error: "Post not found."});
+        return response.status(404).json({ error: "Post not found." });
     }
 
     const comments = await Comment.find({ post_id: postId });
-    response.status(200).json(comments); 
-}
+    response.status(200).json(comments);
+};
 
 
 const createComment = async (request, response) => {
@@ -41,7 +41,7 @@ const createComment = async (request, response) => {
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const deleteComment = async (request, response) => {
@@ -49,22 +49,22 @@ const deleteComment = async (request, response) => {
     const userId = request.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(commentId)) {
-        return response.status(400).json({error: "Invalid ID format."});
+        return response.status(400).json({ error: "Invalid ID format." });
     }
 
     const comment = await Comment.findOneAndDelete({
         _id: commentId,
-        author_id: userId, 
+        author_id: userId,
     });
     if (!comment) {
-        return response.status(404).json({error: "Comment not found."});
+        return response.status(404).json({ error: "Comment not found." });
     }
 
     const io = request.app.get("socketio");
     io.emit("deleted_comment", commentId);
 
     response.status(200).json(comment);
-}
+};
 
 
 const updateComment = async (request, response) => {
@@ -72,19 +72,19 @@ const updateComment = async (request, response) => {
     const userId = request.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(commentId)) {
-        return response.status(400).json({error: "Invalid ID format."});
+        return response.status(400).json({ error: "Invalid ID format." });
     }
 
     const comment = await Comment.findOneAndUpdate(
-        { _id: commentId, author_id: userId }, 
+        { _id: commentId, author_id: userId },
         { ...request.body }
     );
 
     if (!comment) {
-        return response.status(404).json({error: "Comment not found."});
+        return response.status(404).json({ error: "Comment not found." });
     }
 
     response.status(200).json(comment);
-}
+};
 
 module.exports = { getComments, createComment, deleteComment, updateComment };

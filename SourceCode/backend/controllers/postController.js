@@ -4,7 +4,7 @@ const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
 const getPosts = async (request, response) => {
-    const posts = await Post.find({}).sort({createdAt: -1});
+    const posts = await Post.find({}).sort({ createdAt: -1 });
     response.status(200).json(posts);
 };
 
@@ -12,35 +12,35 @@ const getPosts = async (request, response) => {
 const getPost = async (request, response) => {
     const { id } = request.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return response.status(400).json({error: "Invalid ID format."});
+        return response.status(400).json({ error: "Invalid ID format." });
     }
 
     const post = await Post.findById(id);
     if (!post) {
-        return response.status(404).json({error: "Post not found."});
+        return response.status(404).json({ error: "Post not found." });
     }
 
     response.status(200).json(post);
-}
+};
 
 
 const getUsersPosts = async (request, response) => {
-    const { username } = req.params;
+    const { username } = request.params;
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            return response.status(404).json({error: "User not found."});
+            return response.status(404).json({ error: "User not found." });
         }
 
         const posts = await Post.find({ author_id: user._id })
             .populate("author_id", "username firstName lastName")
             .sort({ createdAt: -1 });
-        
+
         response.status(200).json(posts);
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const createPost = async (request, response) => {
@@ -65,7 +65,7 @@ const createPost = async (request, response) => {
     catch (e) {
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const deletePost = async (request, response) => {
@@ -73,7 +73,7 @@ const deletePost = async (request, response) => {
     const author_id = request.user._id;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return response.status(400).json({error: "Invalid ID format."});
+        return response.status(400).json({ error: "Invalid ID format." });
     }
 
     const session = await mongoose.startSession();
@@ -88,14 +88,14 @@ const deletePost = async (request, response) => {
         if (!post) {
             await session.abortTransaction();
             session.endSession();
-            return response.status(404).json({error: "Post not found."});
+            return response.status(404).json({ error: "Post not found." });
         }
 
         await Comment.deleteMany({ post_id: id }).session(session);
 
         await session.commitTransaction();
         session.endSession();
-        
+
         const io = request.app.get("socketio");
         io.emit("deleted_post", id);
 
@@ -105,27 +105,27 @@ const deletePost = async (request, response) => {
         session.endSession();
         response.status(500).json({ error: e.message });
     }
-}
+};
 
 
 const updatePost = async (request, response) => {
     const { id } = request.params;
     const author_id = request.user._id;
-    
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return response.status(400).json({error: "Invalid ID format."});
+        return response.status(400).json({ error: "Invalid ID format." });
     }
 
     const post = await Post.findOneAndUpdate(
-        { _id: id, author_id }, 
+        { _id: id, author_id },
         { ...request.body }
     );
     if (!post) {
-        return response.status(404).json({error: "Post not found."});
+        return response.status(404).json({ error: "Post not found." });
     }
 
     response.status(200).json(post);
-}
+};
 
 
 module.exports = { getPosts, getPost, getUsersPosts, createPost, deletePost, updatePost };

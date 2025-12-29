@@ -17,7 +17,7 @@ const commentSchema = new mongoose.Schema({
         maxLength: 512,
     },
     likes: {
-        type: [mongoose.Schema.Types.ObjectId],
+        type: [ mongoose.Schema.Types.ObjectId ],
         ref: "User",
         default: [],
     },

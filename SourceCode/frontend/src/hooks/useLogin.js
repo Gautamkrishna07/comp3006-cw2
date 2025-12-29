@@ -15,7 +15,7 @@ const useLogin = () => {
         try {
             const response = await fetch(`${baseUrl}/users/login`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
 
@@ -30,14 +30,13 @@ const useLogin = () => {
             localStorage.setItem("user", JSON.stringify(json));
             dispatch({ type: "LOGIN", payload: json });
         } catch (e) {
-            console.error(e);
             setError(e.message);
         } finally {
             setIsLoading(false);
         }
-    }
-    
+    };
+
     return { login, isLoading, error };
-}
+};
 
 export default useLogin;

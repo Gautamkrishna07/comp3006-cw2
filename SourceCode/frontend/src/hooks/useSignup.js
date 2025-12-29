@@ -5,7 +5,7 @@ const useSignup = () => {
     const [ error, setError ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false);
     const { dispatch } = useAuthContext();
-    
+
     const signup = async (username, email, password, confirmPassword, firstName, lastName) => {
         setIsLoading(true);
         setError(null);
@@ -14,7 +14,7 @@ const useSignup = () => {
             setIsLoading(false);
             setError("Passwords don't match!");
             return;
-        } 
+        }
 
         const baseUrl = process.env.REACT_APP_API_BASE_URL || "/api";
 
@@ -35,16 +35,15 @@ const useSignup = () => {
 
             localStorage.setItem("user", JSON.stringify(json)); // username, email, token
             dispatch({ type: "LOGIN", payload: json });
-            
+
         } catch (e) {
-            console.error(e);
             setError(e.message);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     return { signup, isLoading, error };
-}
- 
+};
+
 export default useSignup;
