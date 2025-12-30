@@ -7,7 +7,15 @@ export const PostContext = createContext();
 export const postReducer = (state, action) => {
     switch (action.type) {
         case "SET_POSTS":
-            return { posts: action.payload};
+            return { 
+                posts: action.payload.posts,
+                hasMore: action.payload.hasMore
+            };
+        case "LOAD_MORE_POSTS":
+            return { 
+                posts: [ ...state.posts, ...action.payload.posts ],
+                hasMore: action.payload.hasMore
+            };
         case "ADD_POST":
             return { posts: [ action.payload, ...state.posts ] };
         default:

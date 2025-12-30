@@ -3,12 +3,6 @@ const mongoose = require("mongoose");
 const Post = require("../models/postModel");
 const User = require("../models/userModel");
 
-const getPosts = async (request, response) => {
-    const posts = await Post.find({}).sort({ createdAt: -1 });
-    response.status(200).json(posts);
-};
-
-
 const getPost = async (request, response) => {
     const { id } = request.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -23,25 +17,71 @@ const getPost = async (request, response) => {
     response.status(200).json(post);
 };
 
+const getPosts = async (request, response) => {
+    const page = parseInt(request.query.page) || 1;
+    const limit = parseInt(request.query.limit) || 50;
+    const skip = (page - 1) * limit;
+
+    try {
+        const posts = await Post.find({})
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit)
+            .populate("author", "username");
+
+        const totalPosts = await Post.countDocuments();
+
+        response.status(200).json({
+            posts,
+            currentPage: page,
+            pages: Math.ceil(totalPosts / limit),
+            hasMore: skip + posts.length < totalPosts
+        });
+    } catch (e) {
+        response.status(500).json({ error: e.message });
+    }
+};
 
 const getUsersPosts = async (request, response) => {
     const { username } = request.params;
+
+    const page = parseInt(request.query.page) || 1;
+    const limit = parseInt(request.query.limit) || 50;
+    const skip = (page - 1) * limit;
+
     try {
         const user = await User.findOne({ username });
         if (!user) {
             return response.status(404).json({ error: "User not found." });
         }
 
-        const posts = await Post.find({ author_id: user._id })
-            .populate("author_id", "username firstName lastName")
-            .sort({ createdAt: -1 });
+        // const posts = await Post.find({ author_id: user._id })
+        //     .sort({ createdAt: -1 })
+        //     .skip(skip)
+        //     .limit(limit)
+        //     .populate("author_id", "username firstName lastName");
 
-        response.status(200).json(posts);
+        // const totalPosts = await Post.countDocuments({ author_id: user._id });
+
+        const [ posts, totalPosts ] = await Promise.all([
+            await Post.find({ author_id: user._id })
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .populate("author_id", "username firstName lastName"),
+            await Post.countDocuments({ author_id: user._id })
+        ]);
+
+        response.status(200).json({
+            posts,
+            currentPage: page,
+            pages: Math.ceil(totalPosts / limit),
+            hasMore: skip + posts.length < totalPosts
+        });
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
 };
-
 
 const createPost = async (request, response) => {
     const { body } = request.body;
