@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useLogout from "../hooks/useLogout";
-
+import { LogOut  } from "lucide-react";
+import clsx from "clsx";
 import styles from "../styles/Navbar.module.css";
 
 const Navbar = () => {
@@ -16,23 +17,37 @@ const Navbar = () => {
                 <nav className={styles.navLinks}>
                     { user ? (
                         <>
-                            <Link className={styles.navItem} to="/">Home Feed</Link>
-                            <Link className={styles.navItem} to={`/profile/${user.username}`}>{user.username}</Link>
+                            <NavLink 
+                                className={({ isActive }) => clsx(styles.navItem, { [styles.active]: isActive })}
+                                to="/"
+                            >Home Feed</NavLink>
 
-                            <button className={styles.navItem} onClick={logout}>
-                                Log out
+                            <NavLink 
+                                className={({ isActive }) => clsx(styles.navItem, { [styles.active]: isActive })}
+                                to={`/profile/${user.username}`}
+                            >{user.username}</NavLink>
+
+                            <button className={clsx(styles.navItem)} onClick={logout}>
+                                <LogOut size={20}/>
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link className={styles.navItem} to="/login">Login</Link>
-                            <Link className={styles.navItem} to="/signup">Signup</Link>
+                            <NavLink 
+                                className={({ isActive }) => clsx(styles.navItem, { [styles.active]: isActive })}
+                                to="/login"  
+                            >Login</NavLink>
+
+                            <NavLink 
+                                className={({ isActive }) => clsx(styles.navItem, { [styles.active]: isActive })}
+                                to="/signup"
+                            >Signup</NavLink>
                         </>
                     )}
                 </nav>
             </div>
         </header>
-     );
+    );
 }
  
 export default Navbar;

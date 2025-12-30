@@ -23,11 +23,11 @@
 .navItem {
   color: var(--text-color);
   text-decoration: none;
-  padding: 8px 16px;
+  padding: 1rem 2rem;
+  margin-bottom: -1px;
+  background: transparent;
   border: none;  
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-flex;
@@ -35,9 +35,15 @@
   font-family: inherit;
 }
 
+.active {
+  border-bottom: 4px solid var(--border-color) !important;
+  font-weight: bold;
+}
+
 .navItem:hover {
-  background: #e0e0e0;
-  border-color: var(--border-color);
+  background-color: var(--light-gray);
+  border-color: var(--gray) !important;
+  border-radius: 6px;
   transform: translateY(-1px);
 }
 
