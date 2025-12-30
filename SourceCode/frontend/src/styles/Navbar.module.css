@@ -16,14 +16,14 @@
 
 .navLinks {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
 }
 
 .navItem {
   color: var(--text-color);
   text-decoration: none;
-  padding: 1rem 2rem;
+  padding: 1rem;
   margin-bottom: -1px;
   background: transparent;
   border: none;  
