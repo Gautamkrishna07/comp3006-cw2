@@ -31,14 +31,12 @@ const Signup = () => {
                         name="firstName" id="firstName"
                         onChange={(e) => { setFirstname(e.target.value);}}
                         value={firstName}
-                        required
                     />
                     <input
                         type="text"
                         name="lastName" id="lastName"
                         onChange={(e) => { setLastname(e.target.value);}}
                         value={lastName}
-                        required
                     />
                 </div>
 

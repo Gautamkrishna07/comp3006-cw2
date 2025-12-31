@@ -1,8 +1,23 @@
 const mongoose = require("mongoose");
 
+const Comment = require("../models/commentModel");
 const Post = require("../models/postModel");
 const Relationship = require("../models/relationshipModel");
 const User = require("../models/userModel");
+
+const DEFAULT_LOAD_LIMIT = 25;
+
+const addPostMetricsHelper = async (posts) => {
+    return await Promise.all(posts.map(async (post) => {
+        const totalComments = await Comment.countDocuments({ post_id: post._id });
+        const totalLikes = post.likes ? post.likes.length : 0;
+        return {
+            ...post._doc,
+            totalComments,
+            totalLikes
+        };
+    }));
+}
 
 const getPost = async (request, response) => {
     const { id } = request.params;
@@ -20,21 +35,23 @@ const getPost = async (request, response) => {
 
 const getPosts = async (request, response) => {
     const page = parseInt(request.query.page) || 1;
-    const limit = parseInt(request.query.limit) || 50;
+    const limit = parseInt(request.query.limit) || DEFAULT_LOAD_LIMIT;
     const skip = (page - 1) * limit;
 
     try {
         const [ posts, totalPosts ] = await Promise.all([
-            await Post.find({})
+            Post.find({})
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
                 .populate("author_id", "username firstName lastName"),
-            await Post.countDocuments()
+            Post.countDocuments()
         ])
 
+        const postsWithMetrics = await addPostMetricsHelper(posts);
+
         response.status(200).json({
-            posts,
+            posts: postsWithMetrics,
             currentPage: page,
             pages: Math.ceil(totalPosts / limit),
             hasMore: skip + posts.length < totalPosts
@@ -48,7 +65,7 @@ const getUsersPosts = async (request, response) => {
     const { username } = request.params;
 
     const page = parseInt(request.query.page) || 1;
-    const limit = parseInt(request.query.limit) || 25;
+    const limit = parseInt(request.query.limit) || DEFAULT_LOAD_LIMIT;
     const skip = (page - 1) * limit;
 
     try {
@@ -66,16 +83,18 @@ const getUsersPosts = async (request, response) => {
         // const totalPosts = await Post.countDocuments({ author_id: user._id });
 
         const [ posts, totalPosts ] = await Promise.all([
-            await Post.find({ author_id: user._id })
+            Post.find({ author_id: user._id })
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
                 .populate("author_id", "username firstName lastName"),
-            await Post.countDocuments({ author_id: user._id })
+            Post.countDocuments({ author_id: user._id })
         ]);
 
+        const postsWithMetrics = await addPostMetricsHelper(posts);
+
         response.status(200).json({
-            posts,
+            posts: postsWithMetrics,
             currentPage: page,
             pages: Math.ceil(totalPosts / limit),
             hasMore: skip + posts.length < totalPosts
@@ -100,16 +119,18 @@ const getFollowingPosts = async (request, response) => {
         followingIds.push(currentUserId);
 
         const [ posts, totalPosts ] = await Promise.all([
-            await Post.find({ author: { $in: followingIds } })
+            Post.find({ author: { $in: followingIds } })
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
                 .populate("author_id", "username firstName lastName"),
-            await Post.countDocuments({ author: { $in: followingIds } })
+            Post.countDocuments({ author: { $in: followingIds } })
         ]);
 
+        const postsWithMetrics = await addPostMetricsHelper(posts);
+
         response.status(200).json({
-            posts,
+            posts: postsWithMetrics,
             currentPage: page,
             pages: Math.ceil(totalPosts / limit),
             hasMore: skip + posts.length < totalPosts

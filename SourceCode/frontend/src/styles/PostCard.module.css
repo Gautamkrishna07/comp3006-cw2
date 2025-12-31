@@ -1,0 +1,105 @@
+.card {
+    border-bottom: 1px solid var(--border-color);
+    margin: 0;
+    padding: 1rem;
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    background: var(--light-gray);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.avatar {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.userInformation {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.username:hover {
+    text-decoration: underline;
+}
+
+.owner {
+    color: var(--primary-color);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.owner:after {
+    content: "Author";
+    font-size: 0.75rem;
+    color: var(--gray);
+}
+
+.userInformation span {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.body {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.actionButton span {
+    line-height: 1;
+    display: inline-block;
+}
+
+.actionButton:hover {
+    background-color: var(--gray);
+}
+
+.date {
+    margin-left: auto;
+    margin-top: auto;
+    color: var(--text-color);
+    font-size: 0.8rem;
+    cursor: default;
+}

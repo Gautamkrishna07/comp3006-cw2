@@ -14,8 +14,12 @@ const getComments = async (request, response) => {
         return response.status(404).json({ error: "Post not found." });
     }
 
-    const comments = await Comment.find({ post_id: postId });
-    response.status(200).json(comments);
+    const [ comments, totalComments ] = await Promise.all([
+        await Comment.find({ post_id: postId }),
+        await Comment.countDocuments({ post_id: postId })
+    ]);
+
+    response.status(200).json({ comments, totalComments });
 };
 
 

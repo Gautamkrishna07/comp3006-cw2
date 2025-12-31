@@ -48,7 +48,7 @@ const signupUser = async (request, response) => {
         });
 
         const token = createJwt(user._id);
-        response.status(200).json({ email, username, token });
+        response.status(200).json({ email, username, token, _id: user._id });
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
@@ -76,7 +76,7 @@ const loginUser = async (request, response) => {
         }
 
         const token = createJwt(user._id);
-        response.status(200).json({ email, username: user.username, token });
+        response.status(200).json({ email, username: user.username, token, _id: user._id });
     } catch (e) {
         response.status(500).json({ error: e.message });
     }
