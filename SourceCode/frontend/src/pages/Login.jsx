@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useLogin from "../hooks/useLogin";
 
-import styles from "../styles/AuthForms.module.css";
+import styles from "../styles/Forms.module.css";
 
 const Login = () => {
 
@@ -16,8 +16,8 @@ const Login = () => {
     };
 
     return (
-        <div className={styles.authContainer}>
-            <form className={styles.authForm} onSubmit={handleSubmit}>
+        <div className={styles.pageContainer}>
+            <form className={styles.form} onSubmit={handleSubmit}>
                 <h3>Login</h3>
 
                 <label htmlFor="email">Email:</label>
@@ -38,7 +38,7 @@ const Login = () => {
                     required
                 />
 
-                <button className={styles.authButton} disabled={isLoading} type="submit">
+                <button className={styles.formButton} disabled={isLoading} type="submit">
                     { isLoading ? "Logging in..." : "Login" }
                 </button>
 

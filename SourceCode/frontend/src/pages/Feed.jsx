@@ -8,7 +8,7 @@ import PostCard from "../components/PostCard";
 import styles from "../styles/Feed.module.css";
 
 const Feed = () => {
-    const { posts, hasMore, fetchPage } = usePosts();
+    const { posts, hasMore, fetchPage, dispatch } = usePosts();
 
     const [ page, setPage ] = useState(1);
 
@@ -28,7 +28,7 @@ const Feed = () => {
                 setFeedType(user?.token ? "following" : "global");
             }
         }
-    }, [ authIsReady, user ]);
+    }, [ authIsReady, user, dispatch ]);
 
     useEffect(() => {
         setPage(1);
@@ -42,6 +42,7 @@ const Feed = () => {
     };
 
     const handleFeedChange = (type) => {
+        dispatch({ type: "CLEAR_POSTS" });
         setFeedType(type);
         localStorage.setItem("previouslySelectedFeed", type);
     };
@@ -99,6 +100,12 @@ const Feed = () => {
                         Load More Posts
                     </button>
                 )}
+                { !hasMore && (
+                    <button className={styles.loadMoreButton} disabled>
+                        Nothing left to load!
+                    </button>
+                )}
+
             </div>
         </div>
     );

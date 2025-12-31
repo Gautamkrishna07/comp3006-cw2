@@ -16,14 +16,14 @@ const {
 // Routes relative to "/api/posts"
 // PUBLIC ROUTES
 router.get("/", getPosts);
-router.get("/:id", getPost);
+router.get("/post/:id", getPost);
 router.get("/user/:username", getUsersPosts);
 // MIDDLEWARE
 router.use(requireAuth);
 // PROTECTED ROUTES
 router.get("/following", getFollowingPosts);
 router.post("/", createPost);
-router.delete("/:id", deletePost);
-router.patch("/:id", updatePost);
+router.delete("/post/:id", deletePost);
+router.patch("/post/:id", updatePost);
 
 module.exports = router;

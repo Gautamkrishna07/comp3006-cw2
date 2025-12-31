@@ -52,4 +52,23 @@
     border-color: var(--gray) !important;
 }
 
+.loadMoreButton {
+    width: 100%;
+    background: none;
+    border: none;
+    margin-top: 2rem;
+    color: var(--gray);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.loadMoreButton:hover:not(:disabled) {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.loadMoreButton:disabled {
+    cursor: default;
+}
+
 /* STILL NEED STYLES FOR .loadMoreButton AND .postList */

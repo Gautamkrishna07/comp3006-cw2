@@ -17,7 +17,12 @@ export const postReducer = (state, action) => {
                 hasMore: action.payload.hasMore
             };
         case "ADD_POST":
-            return { posts: [ action.payload, ...state.posts ] };
+            const exists = state.posts.some(p => p._id === action.payload._id);
+            if (exists) return state;
+
+            return { ...state, posts: [ action.payload, ...state.posts ] };
+        case "CLEAR_POSTS":
+            return { posts: [], hasMore: false };
         default:
             return state;
     }

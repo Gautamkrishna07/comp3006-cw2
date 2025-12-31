@@ -6,42 +6,48 @@ import Feed from "./pages/Feed";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import NewPost from "./pages/NewPost";
 
 function App() {
-  const { user } = useAuthContext();
+    const { user } = useAuthContext();
 
-  return (
-    <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <div className="pages">
-            <Routes>
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Navbar />
+                <div className="pages">
+                    <Routes>
 
-              <Route 
-                path="/" 
-                element={ <Feed /> }
-              />
+                        <Route
+                            path="/"
+                            element={ <Feed /> }
+                        />
 
-              <Route 
-                path="/profile/:username" 
-                element={ user ? <Profile /> : <Navigate to="/login"/> }
-              />
+                        <Route
+                            path="/profile/:username"
+                            element={ user ? <Profile /> : <Navigate to="/login"/> }
+                        />
 
-              <Route 
-                path="/login" 
-                element={ !user ? <Login /> : <Navigate to="/"/> }
-              />
+                        <Route
+                            path="/posts/new"
+                            element={ user ? <NewPost /> : <Navigate to="/login"/> }
+                        />
 
-              <Route 
-                path="/signup" 
-                element={ !user ? <Signup /> : <Navigate to="/"/> }
-              />
+                        <Route
+                            path="/login"
+                            element={ !user ? <Login /> : <Navigate to="/"/> }
+                        />
 
-            </Routes>
-          </div>
-        </BrowserRouter>
-    </div>
-  );
+                        <Route
+                            path="/signup"
+                            element={ !user ? <Signup /> : <Navigate to="/"/> }
+                        />
+
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

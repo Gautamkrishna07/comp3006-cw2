@@ -24,13 +24,14 @@ const getPosts = async (request, response) => {
     const skip = (page - 1) * limit;
 
     try {
-        const posts = await Post.find({})
-            .sort({ createdAt: -1 })
-            .skip(skip)
-            .limit(limit)
-            .populate("author", "username");
-
-        const totalPosts = await Post.countDocuments();
+        const [ posts, totalPosts ] = await Promise.all([
+            await Post.find({})
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .populate("author_id", "username firstName lastName"),
+            await Post.countDocuments()
+        ])
 
         response.status(200).json({
             posts,
@@ -47,7 +48,7 @@ const getUsersPosts = async (request, response) => {
     const { username } = request.params;
 
     const page = parseInt(request.query.page) || 1;
-    const limit = parseInt(request.query.limit) || 50;
+    const limit = parseInt(request.query.limit) || 25;
     const skip = (page - 1) * limit;
 
     try {
@@ -86,7 +87,7 @@ const getUsersPosts = async (request, response) => {
 
 const getFollowingPosts = async (request, response) => {
     const page = parseInt(request.query.page) || 1;
-    const limit = parseInt(request.query.limit) || 50;
+    const limit = parseInt(request.query.limit) || 25;
     const skip = (page - 1) * limit;
 
     const currentUserId = request.user_id;
@@ -96,6 +97,7 @@ const getFollowingPosts = async (request, response) => {
             follower_id: currentUserId
         }).select("following_id");
         const followingIds = following.map(f => f.following_id);
+        followingIds.push(currentUserId);
 
         const [ posts, totalPosts ] = await Promise.all([
             await Post.find({ author: { $in: followingIds } })
@@ -131,8 +133,12 @@ const createPost = async (request, response) => {
             author_id, body
         });
 
+        await post.populate("author_id", "username firstName lastName");
+
         const io = request.app.get("socketio");
-        io.emit("new_post", await post.populate("author", "username"));
+        if (io) {
+            io.emit("new_post", post);
+        }
 
         response.status(201).json(post);
     }
