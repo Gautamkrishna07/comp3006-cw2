@@ -18,7 +18,7 @@ router.use(requireAuth);
 // PROTECTED ROUTES
 router.post("/:targetUserId", followUser);
 router.delete("/:targetUserId", unfollowUser);
-router.get("/following/:userId", getFollowing);
-router.get("/followers/:userId", getFollowers);
+router.get("/:userId/following", getFollowing);
+router.get("/:userId/followers", getFollowers);
 
 module.exports = router;
