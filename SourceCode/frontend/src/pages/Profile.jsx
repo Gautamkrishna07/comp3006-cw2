@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import FollowButton from "../components/FollowButton";
@@ -72,29 +72,38 @@ const Profile = () => {
                 </div>
 
                 <div className={styles.details}>
+
                     <div className={styles.nameRow}>
                         <h1>{profile?.firstName || "Anonymous"} {profile.lastName}</h1>
                         {currentUser && !isOwner && (
                             <FollowButton targetUser={profile._id} />
                         )}
                     </div>
+
                     <p className={styles.handle}>@{profile.username}</p>
 
                     <div className={styles.metrics}>
-                        <Link
-                            to="./following"
-                        >
-                            <strong>{followingCount || 0}</strong> Following
-                        </Link> |
+                        {!profile ? (
+                            <p className="centred">Loading metrics...</p>
+                        ) : (
+                            <>
+                                <Link
+                                    to="./following"
+                                >
+                                    <strong>{followingCount || 0}</strong> Following
+                                </Link> |
 
-                        <Link
-                            to="./followers"
-                        >
-                            <strong>{followerCount || 0}</strong> Followers
-                        </Link> |
+                                <Link
+                                    to="./followers"
+                                >
+                                    <strong>{followerCount || 0}</strong> Followers
+                                </Link> |
 
-                        <span><strong>{profile?.totalPosts || 0}</strong> Posts</span>
+                                <span><strong>{profile?.totalPosts || 0}</strong> Posts</span>
+                            </>
+                        )}
                     </div>
+
                 </div>
             </header>
 

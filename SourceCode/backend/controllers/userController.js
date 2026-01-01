@@ -126,7 +126,16 @@ const getUserById = async (request, response) => {
             return response.status(404).json({ error: "User not found." });
         }
 
-        response.status(200).json(user);
+        const [ followerCount, followingCount ] = await Promise.all([
+            Relationship.countDocuments({ following_id: user._id }),
+            Relationship.countDocuments({ follower_id: user._id })
+        ]);
+
+        response.status(200).json({
+            ...user._doc,
+            followerCount,
+            followingCount
+        });
     } catch (e) {
         response.status(500).json({ error: e.message });
     }

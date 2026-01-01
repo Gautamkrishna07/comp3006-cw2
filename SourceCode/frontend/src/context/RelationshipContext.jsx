@@ -75,8 +75,8 @@ export const RelationshipContextProvider = ({ children }) => {
                         type: "SET_FOLLOWING", 
                         payload: { 
                             following: ids,
-                            followerCount: user.followerCount || 0,
-                            followingCount: user.followingCount || 0,
+                            followerCount: json.followerCount || 0,
+                            followingCount: json.followingCount || 0,
                         }
                     });
                 }
@@ -91,13 +91,17 @@ export const RelationshipContextProvider = ({ children }) => {
 
     const fetchProfileMetrics = useCallback(async (targetUserId) => {
         try  {
-            const response = await fetch(`${baseUrl}/users/id/${targetUserId}`);
+            const response = await fetch(`${baseUrl}/users/id/${targetUserId}`, {
+                headers: {
+                    "Authorization": `Bearer ${user?.token}`
+                }
+            });
             const json = await response.json();
             if (response.ok) {
                 dispatch({
                     type: "UPDATE_COUNTS",
                     payload: {
-                        followerCount: json.followCount,
+                        followerCount: json.followerCount,
                         followingCount: json.followingCount,
                     }
                 });
@@ -105,7 +109,7 @@ export const RelationshipContextProvider = ({ children }) => {
         } catch (error) {
             console.error("Error fetching follower/ing metrics: " + error);
         }
-    }, [ baseUrl ]);
+    }, [ baseUrl, user?.token ]);
 
     const isAlreadyFollowing = useCallback((userId) => {
         if (!state.following) return false;
