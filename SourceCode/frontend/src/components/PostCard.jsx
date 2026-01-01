@@ -8,7 +8,7 @@ import styles from "../styles/PostCard.module.css";
 
 const PostCard = ({ post }) => {
     const { user, authIsReady } = useAuthContext();
-    const { toggleLike } = usePosts();
+    const { deletePost, toggleLike } = usePosts();
 
     const author = post?.author_id;
     const isOwner = authIsReady && user && author && user._id === author._id;
@@ -23,8 +23,7 @@ const PostCard = ({ post }) => {
 
     const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this post?")) {
-            // eslint-disable-next-line no-console
-            console.log("Delete post:", post._id);
+            deletePost(post._id);
         }
     };
 

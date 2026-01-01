@@ -99,6 +99,28 @@ export const PostContextProvider = ({ children }) => {
         }
     }, [ user, baseUrl ]);
 
+    const deletePost = useCallback(async (postId) => {
+        if (!user) return;
+
+        try {
+            const response = await fetch(`${baseUrl}/posts/post/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${user?.token}`
+                },
+            });
+
+            const json = await response.json();
+
+            if (response.ok) {
+                dispatch({ type: "REMOVE_POST", payload: json });
+            }
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error("Error liking post:", error);
+        }
+    }, [ user, baseUrl ]);
+
     /** SOCKET LIFECYCLE */
     useEffect(() => {
         if (user === undefined) return; // Guard against initialisations
@@ -123,7 +145,7 @@ export const PostContextProvider = ({ children }) => {
     }, [ user, socketUrl ]);
 
     return (
-        <PostContext.Provider value={{ ...state, dispatch, fetchPage, toggleLike }}>
+        <PostContext.Provider value={{ ...state, dispatch, deletePost, fetchPage, toggleLike }}>
             { children }
         </PostContext.Provider>
     );
