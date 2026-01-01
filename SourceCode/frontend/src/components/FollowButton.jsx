@@ -5,7 +5,7 @@ import { useRelationship } from "../hooks/useRelationshipContext";
 import styles from "../styles/FollowButton.module.css";
 
 const FollowButton = ({ targetUser }) => {
-    const { follow, unfollow, isAlreadyFollowing, following } = useRelationship();
+    const { follow, unfollow, isAlreadyFollowing } = useRelationship();
     const alreadyFollowing = isAlreadyFollowing(targetUser);
 
     const handleClick = () => {
