@@ -5,7 +5,7 @@ const Post = require("../models/postModel");
 const Relationship = require("../models/relationshipModel");
 const User = require("../models/userModel");
 
-const DEFAULT_LOAD_LIMIT = 25;
+const DEFAULT_LOAD_LIMIT = 10;
 
 const addPostMetricsHelper = async (posts) => {
     return await Promise.all(posts.map(async (post) => {
@@ -91,13 +91,16 @@ const getUsersPosts = async (request, response) => {
             Post.countDocuments({ author_id: user._id })
         ]);
 
+        console.log(totalPosts);
+
         const postsWithMetrics = await addPostMetricsHelper(posts);
 
         response.status(200).json({
             posts: postsWithMetrics,
             currentPage: page,
             pages: Math.ceil(totalPosts / limit),
-            hasMore: skip + posts.length < totalPosts
+            hasMore: skip + posts.length < totalPosts,
+            totalPosts,
         });
     } catch (e) {
         response.status(500).json({ error: e.message });
