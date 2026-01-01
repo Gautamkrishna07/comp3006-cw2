@@ -75,8 +75,11 @@ const Profile = () => {
 
                     <div className={styles.nameRow}>
                         <h1>{profile?.firstName || "Anonymous"} {profile.lastName}</h1>
+                        
                         {currentUser && !isOwner && (
-                            <FollowButton targetUser={profile._id} />
+                            <div className={styles.followButton}>
+                                <FollowButton targetUser={profile._id} size={32} />
+                            </div>
                         )}
                     </div>
 

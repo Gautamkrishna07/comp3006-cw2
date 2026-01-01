@@ -8,19 +8,17 @@
     border: none;
     background: none;
     transform: translateY(2px);
+    padding: 1rem;
 }
 
-/* .follow {
-    
+.button:hover {
+    background: var(--light-gray);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
-
-.unfollow {
-
-} */
 
 .minusIcon {
     display: none;
-    
 }
 
 .unfollow:hover {

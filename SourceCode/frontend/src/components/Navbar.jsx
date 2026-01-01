@@ -23,7 +23,7 @@ const Navbar = () => {
                                 to="/"
                                 aria-label="Home feed"
                                 title="Explore the home feed"
-                            >{<House size={20} />} &nbsp; Home Feed</NavLink>
+                            >{<House size={20} />} &nbsp; Home</NavLink>
 
                             <NavLink
                                 className={({ isActive }) => clsx(styles.navItem, { [styles.active]: isActive })}

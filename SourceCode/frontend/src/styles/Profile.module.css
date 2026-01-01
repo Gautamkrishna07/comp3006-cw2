@@ -9,7 +9,7 @@
     border-bottom: 1px solid var(--border-color);
     display: flex;
     gap: 1rem;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .avatar {
@@ -26,14 +26,17 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 0.25rem;
+    overflow: visible;
 }
 
 .nameRow {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: relative;
+    gap: 0;
 }
 
 .nameRow h1 {
@@ -41,6 +44,14 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--text-color);
+    padding-right: 2rem;
+}
+
+.followButton {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .handle {

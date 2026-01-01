@@ -4,7 +4,7 @@ import { UserRoundPlus, UserRoundMinus, UserRoundCheck } from "lucide-react";
 import { useRelationship } from "../hooks/useRelationshipContext";
 import styles from "../styles/FollowButton.module.css";
 
-const FollowButton = ({ targetUser }) => {
+const FollowButton = ({ targetUser, size = 18 }) => {
     const { follow, unfollow, isAlreadyFollowing } = useRelationship();
     const alreadyFollowing = isAlreadyFollowing(targetUser);
 
@@ -25,13 +25,17 @@ const FollowButton = ({ targetUser }) => {
                 ? "Unfollow"
                 : "Follow"
             }
+            aria-label={alreadyFollowing
+                ? "Unfollow"
+                : "Follow"
+            }
         >
             {!alreadyFollowing ? (
-                <UserRoundPlus size={18} />
+                <UserRoundPlus size={size} />
             ) : (
                 <>
-                    <UserRoundCheck size={18} className={styles.checkIcon} />
-                    <UserRoundMinus size={18} className={styles.minusIcon} />
+                    <UserRoundCheck size={size} className={styles.checkIcon} />
+                    <UserRoundMinus size={size} className={styles.minusIcon} />
                 </>
             )}
 
