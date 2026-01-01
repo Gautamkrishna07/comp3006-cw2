@@ -11,7 +11,7 @@
 
 .header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     margin-bottom: 0.5rem;
 }
@@ -29,6 +29,18 @@
 .userInformation {
     display: flex;
     flex-direction: column;
+    min-height: 3rem;
+}
+
+.usernameRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.usernameRow span {
+    font-size: 0.65rem;
+    color: var(--gray);
 }
 
 .username {
@@ -49,16 +61,15 @@
     gap: 0.5rem;
 }
 
-.owner:after {
-    content: "Author";
-    font-size: 0.75rem;
-    color: var(--gray);
-}
-
 .userInformation span {
     color: var(--gray);
     font-size: 0.9rem;
 }
+
+.fullName {
+    margin-top: -3px;
+}
+
 
 .body {
     color: var(--text-color);

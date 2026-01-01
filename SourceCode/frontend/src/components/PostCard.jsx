@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { User, MessageCircle, Heart, Trash } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
+import FollowButton from "../components/FollowButton";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { usePosts } from "../hooks/usePosts";
 import styles from "../styles/PostCard.module.css";
@@ -34,13 +35,17 @@ const PostCard = ({ post }) => {
                     <User size={24} />
                 </div>
                 <div className={styles.userInformation}>
-                    <Link
-                        to={`/profile/${author.username}`}
-                        className={clsx(styles.username, { [styles.owner]: isOwner })}
-                    >
-                        {author.username || "Anonymous"}
-                    </Link>
-                    <span>{author?.firstName} {author?.lastName}</span>
+                    <div className={styles.usernameRow}>
+                        <Link
+                            to={`/profile/${author.username}`}
+                            className={clsx(styles.username, { [styles.owner]: isOwner })}
+                        >
+                            {author.username || "Anonymous"}
+                        </Link>
+
+                        {!isOwner && user && <FollowButton targetUser={author?._id} />}
+                    </div>
+                    <span className={styles.fullName}>{author?.firstName} {author?.lastName}</span>
                 </div>
             </div>
 

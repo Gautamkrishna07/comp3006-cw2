@@ -5,14 +5,17 @@ import "./index.css";
 import App from "./App";
 import { AuthContextProvider } from "./context/AuthContext";
 import { PostContextProvider } from "./context/PostContext";
+import { RelationshipContextProvider } from "./context/RelationshipContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <AuthContextProvider>
-            <PostContextProvider>
-                <App />
-            </PostContextProvider>
+            <RelationshipContextProvider>
+                <PostContextProvider>
+                    <App />
+                </PostContextProvider>
+            </RelationshipContextProvider>
         </AuthContextProvider>
     </React.StrictMode>
 );
