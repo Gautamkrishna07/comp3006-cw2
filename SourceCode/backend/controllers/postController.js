@@ -109,22 +109,23 @@ const getFollowingPosts = async (request, response) => {
     const limit = parseInt(request.query.limit) || 25;
     const skip = (page - 1) * limit;
 
-    const currentUserId = request.user_id;
+    const currentUserId = request.user._id;
 
     try {
         const following = await Relationship.find({
             follower_id: currentUserId
         }).select("following_id");
+
         const followingIds = following.map(f => f.following_id);
         followingIds.push(currentUserId);
 
         const [ posts, totalPosts ] = await Promise.all([
-            Post.find({ author: { $in: followingIds } })
+            Post.find({ author_id: { $in: followingIds } })
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
                 .populate("author_id", "username firstName lastName"),
-            Post.countDocuments({ author: { $in: followingIds } })
+            Post.countDocuments({ author_id: { $in: followingIds } })
         ]);
 
         const postsWithMetrics = await addPostMetricsHelper(posts);
