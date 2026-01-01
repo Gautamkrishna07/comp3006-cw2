@@ -9,7 +9,11 @@ export const postReducer = (state, action) => {
     switch (action.type) {
 
         case "SET_POSTS":
-            return { posts: action.payload.posts, hasMore: action.payload.hasMore };
+            return { 
+                posts: action.payload.posts, 
+                hasMore: action.payload.hasMore,
+                totalPosts: action.payload.totalPosts || 0,
+            };
 
         case "LOAD_MORE_POSTS":
             return {

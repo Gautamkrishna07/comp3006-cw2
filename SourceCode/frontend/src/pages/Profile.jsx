@@ -15,7 +15,7 @@ const Profile = () => {
 
     const { user: currentUser } = useAuthContext();
     const { followerCount, followingCount, fetchProfileMetrics } = useRelationship();
-    const { posts, hasMore, fetchPage, dispatch } = usePosts();
+    const { posts, hasMore, fetchPage, dispatch, totalPosts } = usePosts();
 
     const [ profile, setProfile ] = useState(null);
     const [ page, setPage ] = useState(1);
@@ -99,7 +99,7 @@ const Profile = () => {
                                     <strong>{followerCount || 0}</strong> Followers
                                 </Link> |
 
-                                <span><strong>{profile?.totalPosts || 0}</strong> Posts</span>
+                                <span><strong>{totalPosts || 0}</strong> Posts</span>
                             </>
                         )}
                     </div>
