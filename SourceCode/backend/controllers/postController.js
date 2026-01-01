@@ -107,7 +107,7 @@ const getUsersPosts = async (request, response) => {
 
 const getFollowingPosts = async (request, response) => {
     const page = parseInt(request.query.page) || 1;
-    const limit = parseInt(request.query.limit) || 25;
+    const limit = parseInt(request.query.limit) || DEFAULT_LOAD_LIMIT;
     const skip = (page - 1) * limit;
 
     const currentUserId = request.user._id;

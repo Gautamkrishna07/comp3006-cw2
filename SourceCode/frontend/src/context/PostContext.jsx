@@ -24,7 +24,10 @@ export const postReducer = (state, action) => {
         case "ADD_POST":
             return state.posts.some(post => post._id === action.payload._id)
                 ? state
-                : { ...state, posts: [ action.payload, ...state.posts ]
+                : { 
+                    ...state, 
+                    posts: [ action.payload, ...state.posts ], 
+                    totalPosts: (state.totalPosts || 0) + 1,
                 };
 
         case "UPDATE_POST":
@@ -34,9 +37,11 @@ export const postReducer = (state, action) => {
             };
 
         case "REMOVE_POST":
+            const postExists = state.posts.some(post => post._id === action.payload);
             return {
                 ...state,
-                posts: state.posts.filter(post => post._id !== action.payload)
+                posts: state.posts.filter(post => post._id !== action.payload),
+                totalPosts: postExists ? Math.max(0, (state.totalPosts || 0) - 1) : state.totalPosts,
             };
 
         case "CLEAR_POSTS":
