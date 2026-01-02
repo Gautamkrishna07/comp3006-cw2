@@ -15,17 +15,33 @@
     width: 100%;
 }
 
+.itemHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.authorInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .item {
     padding: 1rem;
     border: 2px solid transparent;
-    border-left: 7px solid var(--primary-color) !important;
+    border-left: 3px solid var(--primary-color) !important;
     background-color: var(--light-gray);
     border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    transition: border-width 0.1s ease-in-out;
 }
 
 .item:hover {
     background: none;
     border: 2px solid var(--border-color);
+    border-left: 6px solid var(--primary-color) !important;
 
 }
 
@@ -33,14 +49,27 @@
     font-weight: bold;
     font-size: 1.1rem;
     color: var(--text-color);
-}
-
-.author a {
     text-decoration: none;
 }
 
-.author a:hover {
+.author:hover {
     text-decoration: underline;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+    color: red;
+    background-color: var(--light-gray);
 }
 
 .body {

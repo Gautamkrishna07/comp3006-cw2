@@ -1,13 +1,10 @@
 import clsx from "clsx";
-import { Ban, Send, User } from "lucide-react";
+import { Ban, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-import { Link } from "react-router-dom";
-
+import CommentCard from "./CommentCard";
 import { useAuthContext } from "../hooks/useAuthContext";
-
-import cardStyles from "../styles/PostCard.module.css";
 import commentStyles from "../styles/Comments.module.css";
 import formStyles from "../styles/Forms.module.css";
 
@@ -76,7 +73,6 @@ const CommentSection = ({ postId }) => {
                 body: JSON.stringify({ body, post_id: postId })
             });
 
-
             const json = await response.json();
             if (!response.ok) {
                 throw new Error(json.error || "Failed to post comment.");
@@ -111,7 +107,7 @@ const CommentSection = ({ postId }) => {
                         { error && (
                             <p className="error">
                                 <Ban size={18} />
-                                { error }
+                                { error.message }
                             </p>
                         )}
 
@@ -142,25 +138,7 @@ const CommentSection = ({ postId }) => {
             <div className={commentStyles.list}>
                 { comments.length > 0 ? (
                     comments.map((comment) => (
-                        <div key={comment._id} className={ commentStyles.item }>
-
-                            <div className={cardStyles.avatar}>
-                                <User size={24} />
-                            </div>
-
-                            <Link
-                                to={`/profile/${comment.author_id?.username}`}
-                                className={ commentStyles.author }
-                            >
-                                { comment.author_id?.username }
-                            </Link>
-
-                            <p className={ commentStyles.body }>{ comment.body }</p>
-
-                            <span className={ commentStyles.date }>
-                                { new Date(comment.createdAt).toLocaleString() }
-                            </span>
-                        </div>
+                        <CommentCard key={comment._id} comment={comment} postId={postId} />
                     ))
                 ) : (
                     <p className="centred">No comments yet. Be the first!</p>

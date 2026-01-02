@@ -32,7 +32,9 @@ const getPost = async (request, response) => {
         return response.status(404).json({ error: "Post not found." });
     }
 
-    response.status(200).json(post);
+    const [ postWithMetrics ] = await addPostMetricsHelper([ post ]);
+
+    response.status(200).json(postWithMetrics);
 };
 
 const getPosts = async (request, response) => {
@@ -275,4 +277,9 @@ const likePost = async (request, response) => {
     }
 };
 
-module.exports = { getPosts, getPost, getUsersPosts, getFollowingPosts, createPost, deletePost, updatePost, likePost };
+module.exports = {
+    addPostMetricsHelper,
+    getPosts, getPost, getUsersPosts, getFollowingPosts,
+    createPost, deletePost, updatePost,
+    likePost
+};

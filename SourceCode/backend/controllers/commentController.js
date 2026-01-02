@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+const { addPostMetricsHelper } = require("./postController");
 const Comment = require("../models/commentModel");
 const Post = require("../models/postModel");
 
@@ -44,6 +45,11 @@ const createComment = async (request, response) => {
         const io = request.app.get("socketio");
         io.emit("new_comment", populatedComment);
 
+        // Ugly
+        const post = await Post.findById(post_id).populate("author_id", "username firstName lastName");
+        const [ postWithMetrics ] = await addPostMetricsHelper([ post ]);
+        io.emit("updated_post", postWithMetrics);
+
         response.status(201).json(comment);
     } catch (e) {
         response.status(500).json({ error: e.message });
@@ -68,6 +74,11 @@ const deleteComment = async (request, response) => {
 
     const io = request.app.get("socketio");
     io.emit("deleted_comment", commentId);
+
+    // Ugly
+    const post = await Post.findById(comment.post_id).populate("author_id", "username firstName lastName");
+    const [ postWithMetrics ] = await addPostMetricsHelper([ post ]);
+    io.emit("updated_post", postWithMetrics);
 
     response.status(200).json(comment);
 };
