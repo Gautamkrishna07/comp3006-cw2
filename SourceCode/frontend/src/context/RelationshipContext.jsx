@@ -61,7 +61,7 @@ export const RelationshipContextProvider = ({ children }) => {
 
         const fetchFollowing = async () => {
             try {
-                const response = await fetch(`${baseUrl}/relationships/${user._id}/following`, {
+                const response = await fetch(`${baseUrl}/users/username/${user.username}/following`, {
                     headers: {
                         "Authorization": `Bearer ${user?.token}`
                     },
@@ -114,6 +114,7 @@ export const RelationshipContextProvider = ({ children }) => {
 
     const isAlreadyFollowing = useCallback((userId) => {
         if (!state.following) return false;
+        console.log("Checking if following:", userId, "against list:", state.following);
         return state.following.some(id => String(id) === String(userId));
     }, [ state.following ]);
 
