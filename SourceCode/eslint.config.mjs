@@ -57,7 +57,7 @@ export default [
 
     // FRONTEND ONLY
     {
-        files: ["frontend/src/**/*.{js,jsx}"],
+        files: ["**/frontend/src/**/*.{js,jsx}"],
         plugins: {
             react: reactPlugin,
         },

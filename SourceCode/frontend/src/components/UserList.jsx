@@ -2,9 +2,8 @@ import { User } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 
 import FollowButton from "./FollowButton";
-
-import profileStyles from '../styles/Profile.module.css';
-import listStyles from '../styles/UserList.module.css';
+import profileStyles from "../styles/Profile.module.css";
+import listStyles from "../styles/UserList.module.css";
 
 const UserList = ({ users, type }) => {
     const { username } = useParams();
