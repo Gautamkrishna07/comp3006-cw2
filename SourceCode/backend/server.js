@@ -69,7 +69,7 @@ app.use("/api/users", userRoutes);
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // Listen for requests, only AFTER database connection established
-        server.listen(process.env.PORT, () => {
+        server.listen(process.env.PORT || 4000, "0.0.0.0", () => {
             // eslint-disable-next-line no-console
             console.log(`Connected to database and listening on Port ${process.env.PORT}!`);
         });
