@@ -40,7 +40,7 @@ const Post = () => {
         }
     }, [ id, post, dispatch, baseUrl ]);
 
-    if (error) return <p className="error">{ error.message }</p>;
+    if (error) return <p className="error">{ error || error.message }</p>;
     if (!post) return <p className="centred">Loading post...</p>;
 
     return (

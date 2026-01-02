@@ -107,7 +107,7 @@ const CommentSection = ({ postId }) => {
                         { error && (
                             <p className="error">
                                 <Ban size={18} />
-                                { error.message }
+                                { error || error.message }
                             </p>
                         )}
 

@@ -53,7 +53,7 @@ const NewPost = () => {
                 { error && (
                     <p className="error">
                         <Ban size={18} />
-                        { error }
+                        { error || error.message }
                     </p>
                 )}
 

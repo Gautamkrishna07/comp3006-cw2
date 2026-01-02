@@ -80,7 +80,7 @@ const Signup = () => {
                     { isLoading ? "Signing up..." : "Sign up" }
                 </button>
 
-                { error && <p className="error">{ error }</p> }
+                { error && <p className="error">{ error || error.message }</p> }
             </form>
         </div>
     );
