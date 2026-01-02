@@ -10,7 +10,7 @@ const UserList = ({ users, type }) => {
 
     const title = (type === "followers")
         ? `Followers of @${ username } (${users.length})`
-        : `Users who follow @${ username } (${users.length})`;
+        : `Users @${ username } is following (${users.length})`;
 
     return (
         <div className={profileStyles.container}>
