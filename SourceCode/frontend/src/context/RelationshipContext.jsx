@@ -71,9 +71,9 @@ export const RelationshipContextProvider = ({ children }) => {
 
                 if (response.ok) {
                     const ids = json.map(f => String(f.following_id._id));
-                    dispatch({ 
-                        type: "SET_FOLLOWING", 
-                        payload: { 
+                    dispatch({
+                        type: "SET_FOLLOWING",
+                        payload: {
                             following: ids,
                             followerCount: json.followerCount || 0,
                             followingCount: json.followingCount || 0,
@@ -107,6 +107,7 @@ export const RelationshipContextProvider = ({ children }) => {
                 });
             }
         } catch (error) {
+            // eslint-disable-next-line no-console
             console.error("Error fetching follower/ing metrics: " + error);
         }
     }, [ baseUrl, user?.token ]);

@@ -9,8 +9,8 @@ export const postReducer = (state, action) => {
     switch (action.type) {
 
         case "SET_POSTS":
-            return { 
-                posts: action.payload.posts, 
+            return {
+                posts: action.payload.posts,
                 hasMore: action.payload.hasMore,
                 totalPosts: action.payload.totalPosts || 0,
             };
@@ -24,9 +24,9 @@ export const postReducer = (state, action) => {
         case "ADD_POST":
             return state.posts.some(post => post._id === action.payload._id)
                 ? state
-                : { 
-                    ...state, 
-                    posts: [ action.payload, ...state.posts ], 
+                : {
+                    ...state,
+                    posts: [ action.payload, ...state.posts ],
                     totalPosts: (state.totalPosts || 0) + 1,
                 };
 
@@ -37,12 +37,15 @@ export const postReducer = (state, action) => {
             };
 
         case "REMOVE_POST":
-            const postExists = state.posts.some(post => post._id === action.payload);
-            return {
-                ...state,
-                posts: state.posts.filter(post => post._id !== action.payload),
-                totalPosts: postExists ? Math.max(0, (state.totalPosts || 0) - 1) : state.totalPosts,
-            };
+            // lexical declaration in case block, needs scope guarding for linting
+            {
+                const postExists = state.posts.some(post => post._id === action.payload);
+                return {
+                    ...state,
+                    posts: state.posts.filter(post => post._id !== action.payload),
+                    totalPosts: postExists ? Math.max(0, (state.totalPosts || 0) - 1) : state.totalPosts,
+                };
+            }
 
         case "CLEAR_POSTS":
             return { posts: [], hasMore: false };
@@ -61,7 +64,7 @@ export const PostContextProvider = ({ children }) => {
 
     /** API ACTIONS */
     const fetchPage = useCallback(async ( page, type, username = null ) => {
-        
+
         let endpoint = "/posts";
         if (type === "following") {
             endpoint = "/posts/following";

@@ -2,6 +2,7 @@
   "devDependencies": {
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7"
   },
@@ -16,8 +17,5 @@
     "backend/**/*.js": [
       "eslint --fix"
     ]
-  },
-  "dependencies": {
-    "eslint-plugin-react": "^7.37.5"
   }
 }

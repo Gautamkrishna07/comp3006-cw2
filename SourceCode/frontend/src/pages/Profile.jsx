@@ -5,8 +5,8 @@ import { useParams, Link } from "react-router-dom";
 import FollowButton from "../components/FollowButton";
 import PostCard from "../components/PostCard";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useRelationship } from "../hooks/useRelationshipContext";
 import { usePosts } from "../hooks/usePosts";
+import { useRelationship } from "../hooks/useRelationshipContext";
 import postStyles from "../styles/Feed.module.css";
 import styles from "../styles/Profile.module.css";
 
@@ -37,7 +37,7 @@ const Profile = () => {
                 const json = await user.json();
 
                 setProfile(json);
-                
+
                 fetchProfileMetrics(json._id);
                 fetchPage(1, "profile", username);
                 setPage(1);
@@ -75,7 +75,7 @@ const Profile = () => {
 
                     <div className={styles.nameRow}>
                         <h1>{profile?.firstName || "Anonymous"} {profile.lastName}</h1>
-                        
+
                         {currentUser && !isOwner && (
                             <div className={styles.followButton}>
                                 <FollowButton targetUser={profile._id} size={32} />
