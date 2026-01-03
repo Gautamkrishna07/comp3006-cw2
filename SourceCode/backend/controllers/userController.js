@@ -14,6 +14,7 @@ const createJwt = (_id) => {
 
 export const signupUser = async (request, response) => {
     const { username, email, password, firstName, lastName } = request.body;
+    const USERNAME_REGEX = /^(?![_-])[a-zA-Z0-9_-]{3,30}(?<![_-])$/;
 
     try {
         let emptyFields = [];
@@ -25,7 +26,7 @@ export const signupUser = async (request, response) => {
 
         if (!validator.isEmail(email))
             return response.status(400).json({ error: "Invalid Email Address." });
-        if (!validator.isSlug(username))
+        if (!USERNAME_REGEX.test(username))
             return response.status(400).json({ error: "Invalid Username format." });
         if (!validator.isStrongPassword(password))
             return response.status(400).json({ error: "Password is not strong enough." });
