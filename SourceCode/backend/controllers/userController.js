@@ -48,8 +48,8 @@ export const signupUser = async (request, response) => {
 
         const token = createJwt(user._id);
         response.status(200).json({ email, username, token, _id: user._id });
-    } catch (e) {
-        response.status(500).json({ error: e.message });
+    } catch (error) {
+        response.status(500).json({ error: error.message });
     }
 };
 
@@ -75,8 +75,8 @@ export const loginUser = async (request, response) => {
 
         const token = createJwt(user._id);
         response.status(200).json({ email, username: user.username, token, _id: user._id });
-    } catch (e) {
-        response.status(500).json({ error: e.message });
+    } catch (error) {
+        response.status(500).json({ error: error.message });
     }
 };
 
@@ -105,10 +105,10 @@ export const deleteUser = async (request, response) => {
         await session.commitTransaction();
         session.endSession();
         response.status(200).json({ message: "Account and linked data deleted." });
-    } catch (e) {
+    } catch (error) {
         await session.abortTransaction();
         session.endSession();
-        response.status(500).json({ error: e.message });
+        response.status(500).json({ error: error.message });
     }
 };
 
@@ -137,8 +137,8 @@ export const getUserById = async (request, response) => {
             followerCount,
             followingCount
         });
-    } catch (e) {
-        response.status(500).json({ error: e.message });
+    } catch (error) {
+        response.status(500).json({ error: error.message });
     }
 };
 
@@ -164,7 +164,7 @@ export const getUserByUsername = async (request, response) => {
             followingCount
         });
 
-    } catch (e) {
-        response.status(500).json({ error: e.message });
+    } catch (error) {
+        response.status(500).json({ error: error.message });
     }
 };
