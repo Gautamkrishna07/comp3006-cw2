@@ -4,19 +4,10 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import requireAuth from "./requireAuth";
 import User from "../models/userModel";
 
-vi.mock("jsonwebtoken", () => ({
-    default: {
-        verify: vi.fn()
-    }
-}));
+vi.mock("../models/userModel");
+vi.mock("jsonwebtoken");
 
-vi.mock("../models/userModel", () => ({
-    default: {
-        findById: vi.fn()
-    }
-}));
-
-describe("requireAuth Middleware", () => {
+describe("requireAuth Middleware (Unit)", () => {
     let request, response, next;
 
     beforeEach(() => {
