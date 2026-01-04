@@ -1,0 +1,80 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram name="Page-1" id="5f0bae14-7c28-e335-631c-24af17079c00">
+    <mxGraphModel dx="2540" dy="1402" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-1" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="800" y="80" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-2" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="160" y="240" width="920" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-3" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="400" width="1240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-4" value="MongoDB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="880" y="100" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-5" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;backend: Node.js, Express: 82&lt;/b&gt;&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="210" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-6" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;frontend: React, Socket.io Client: 81&lt;/b&gt;&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="370" width="390" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-7" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;mongodb: 83&lt;/b&gt;&lt;/font&gt;" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="50" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;startArrow=classic;startFill=1;" edge="1" parent="1" source="xXL7PGPZ53bsERlA-Imk-8" target="xXL7PGPZ53bsERlA-Imk-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-20" value="REST API" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="xXL7PGPZ53bsERlA-Imk-16">
+          <mxGeometry y="-1" relative="1" as="geometry">
+            <mxPoint x="-21" y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-8" value="React Application" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="420" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="xXL7PGPZ53bsERlA-Imk-9" target="xXL7PGPZ53bsERlA-Imk-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-9" value="API Routes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="260" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="xXL7PGPZ53bsERlA-Imk-10" target="xXL7PGPZ53bsERlA-Imk-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-10" value="Middleware: requireAuth" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="260" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="xXL7PGPZ53bsERlA-Imk-11" target="xXL7PGPZ53bsERlA-Imk-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-11" value="Controllers" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="260" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-12" value="Socket.io Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="260" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;strokeWidth=2;" edge="1" parent="1" source="xXL7PGPZ53bsERlA-Imk-13" target="xXL7PGPZ53bsERlA-Imk-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-13" value="Socket.io Client" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="420" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;strokeWidth=2;" edge="1" parent="1" source="xXL7PGPZ53bsERlA-Imk-11" target="xXL7PGPZ53bsERlA-Imk-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="280" />
+              <mxPoint x="840" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xXL7PGPZ53bsERlA-Imk-21" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="80" width="97.56" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
