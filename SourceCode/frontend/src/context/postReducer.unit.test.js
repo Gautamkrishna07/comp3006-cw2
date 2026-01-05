@@ -52,6 +52,7 @@ describe("postReducer ADD_POST", () => {
         const state = postReducer(followingState, action);
         // Assert
         expect(state.posts).toHaveLength(0);
+        expect(state).toBe(followingState);
     });
 
     it ("Add Post to Profile fed IF usernames match", () => {
