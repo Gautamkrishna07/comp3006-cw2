@@ -14,7 +14,7 @@ export const postReducer = (state, action) => {
                 ...state,
                 posts: action.payload.posts,
                 hasMore: action.payload.hasMore,
-                totalPosts: action.payload.totalPosts || 0,
+                totalPosts: action.payload.totalPosts,
             };
 
         case "LOAD_MORE_POSTS":
@@ -83,7 +83,16 @@ export const postReducer = (state, action) => {
 };
 
 export const PostContextProvider = ({ children }) => {
-    const [ state, dispatch ] = useReducer(postReducer, { posts: [], hasMore: false, feedtype: { type: "global", username: null } });
+    const [ state, dispatch ] = useReducer(postReducer, {
+        posts: [],
+        hasMore: false,
+        totalPosts: 0,
+        feedtype: {
+            type: "global",
+            username: null
+        }
+    });
+
     const { user } = useAuthContext();
     const { following } = useRelationship();
 

@@ -8,7 +8,9 @@
   },
   "scripts": {
     "prepare": "husky",
-    "lint": "eslint \"**/*.{js,jsx}\" --fix --max-warnings 0"
+    "lint": "eslint \"**/*.{js,jsx}\" --fix --max-warnings 0",
+    "test": "npm run test --prefix backend && npm run test --prefix frontend",
+    "test:coverage": "npm run test:coverage --prefix backend && npm run test:coverage --prefix frontend"
   },
   "lint-staged": {
     "**/*.{js,jsx}": "eslint --fix --max-warnings 0"
